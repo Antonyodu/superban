@@ -1,10 +1,19 @@
 {
-    "name": "laravel/laravel",
+    "name": "edenlife/superban",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": " This package will add the ability to ban a client completely for a period of time",
     "keywords": [
-        "laravel",
-        "framework"
+        "edenlife",
+        "SuperBan",
+        "limiter"
+    ],
+    "homepage": "https://github.com/Antonyodu/superban",
+    "authors": [
+        {
+            "name": "Anthony Odu",
+            "email": "antonyodu@gmail.com",
+            "role": "Developer"
+        }
     ],
     "license": "MIT",
     "require": {
