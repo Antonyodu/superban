@@ -2,33 +2,41 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class SuperBanTest extends TestCase
+class RateLimitTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic feature test example.
      *
      * @return void
      */
-    public function testSuperBanMiddlewareForThisRoute()
+    public function testRateLimit()
     {
-        $response = $this->withMiddleware(['SuperBan:200,2,1440'])->post('/thisroute');
+        // Replace the following with your actual route URL
+        $routeUrl = 'thisroute';
 
-        $response->assertStatus(200)
-            ->assertExactJson(['success' => true]); // Adjust the expected response as needed
-    }
+        // Replace the following with your actual request payload
+        $requestData = [];
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testSuperBanMiddlewareForAnotherRoute()
-    {
-        $response = $this->withMiddleware(['SuperBan:200,2,1440'])->post('/anotherroute');
+        // Replace the following with the rate limit and interval
+        $limit = 10;
 
-        $response->assertStatus(200)
-            ->assertExactJson(['success' => true]); // Adjust the expected response as needed
+        // Send POST requests to trigger rate limit
+        for ($i = 0; $i < $limit + 2; $i++) {
+            $response = $this->json('POST', $routeUrl, $requestData);
+
+            if ($i < $limit) {
+                // Expecting a successful response for the first $limit requests
+                $response->assertStatus(200);
+            } else {
+                // Expecting a 429 response after hitting the rate limit
+                $response->assertStatus(429);
+            }
+
+           
+        }
     }
 }

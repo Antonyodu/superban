@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['SuperBan:200,2,1440'])->group(function () {
+Route::middleware(['SuperBan:10,20,2'])->group(function () {
     Route::any('/thisroute', function () {
-        return true;
+        return response()->json(['success' => true],200);
     });
 
     Route::any('/anotherroute', function () {
-        return true;
+        return response()->json(['success' => true],200);
+
     });
 });
